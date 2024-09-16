@@ -35,9 +35,9 @@ app.use(
   })
 );
 
-// // Enable CSRF Protection
-// const csrfProtection = csurf({ cookie: true });
-// app.use(csrfProtection);
+// Enable CSRF Protection
+const csrfProtection = csurf({ cookie: true });
+app.use(csrfProtection);
 
 // Parse JSON request bodies
 app.use(express.json()); //to add json to the 'req' Object
