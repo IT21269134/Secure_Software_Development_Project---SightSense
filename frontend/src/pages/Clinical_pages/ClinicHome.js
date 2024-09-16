@@ -15,13 +15,14 @@ function ClinicHome() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/Clinics/getAll`
+          // `http://localhost:4000/Clinics/getAll`
+          `${process.env.REACT_APP_API_URL}/Clinics/getAll`
         );
-        if (response.data) {
+        // if (response.data) {
           setClinics(response.data);
-        }
+        // }
       } catch (err) {
-        console.log(err);
+        console.log("Error fetching clinics:",err);
       }
     };
     fetchData();
@@ -33,11 +34,19 @@ function ClinicHome() {
 
   const filteredClinics = clinics.filter(
     (clinic) =>
-      clinic.clinicLocation.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      clinic.clinicName.toLowerCase().includes(searchQuery.toLowerCase())
+      // clinic.clinicLocation.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    // clinic.clinicName.toLowerCase().includes(searchQuery.toLowerCase())
+    [clinic.clinicLocation, clinic.clinicName]
+    .join(" ")
+    .toLowerCase()
+    .includes(searchQuery.toLowerCase())
+
   );
 
   const handleClinicWebsiteClick = (clinicWebsite) => {
+    const sanitizedUrl = clinicWebsite.startsWith("http")
+    ? clinicWebsite
+    : `https://${clinicWebsite}`; // Ensure URLs are valid and safe
     window.open(clinicWebsite, "_blank"); // Open the link in a new tab
   };
 
@@ -86,6 +95,7 @@ function ClinicHome() {
                   }}
                 >
                   {clinic.clinicWebsite}
+                    {/* .replace(/</g, "&lt;").replace(/>/g, "&gt;")} */}
                 </a>
               }
             />
@@ -97,3 +107,4 @@ function ClinicHome() {
 }
 
 export default ClinicHome;
+
