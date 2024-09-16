@@ -13,21 +13,16 @@ function CreateClinic() {
   const navigate = useNavigate();
 
   const ValidateForm = () => {
-    // let isValid = true;
+    let isValid = true;
 
     if (!clinicName) {
-      // isValid = false;
+      isValid = false;
       toast.error("Enter the clinic Name for your clinic!");
-      return false;
     } else if (!clinicLocation) {
-      // isValid = false;
+      isValid = false;
       toast.error("Enter clinic Location to create a clinic!!");
-      return false;
-    } else if (!clinicContact || !/^\d{3}\d{4}\d{3}$/.test(clinicContact)) {
-      toast.error("Enter a valid contact number (07xxxxxxxx).");
-      return false;
     }
-    return true;
+    return isValid;
   };
 
   const Submit = (e) => {
@@ -40,21 +35,18 @@ function CreateClinic() {
         clinicContact,
         clinicWebsite,
       };
-      try {
-        axios
-          .post(
-            `${process.env.REACT_APP_API_URL}/Clinics/createClinic`,
-            newClinicData
-          )
-          .then(() => {
-            toast.success("New Clinic Created!");
-            setTimeout(() => {
-              navigate("/admin");
-            }, 2000);
-          });
-      } catch (err) {
-        toast.error("An Error Occured : ", err);
-      }
+
+      axios
+        .post("http://localhost:4000/Clinics/createClinic", newClinicData)
+        .then(() => {
+          toast.success("New Clinic Created!");
+          setTimeout(() => {
+            navigate("/admin");
+          }, 3000);
+        })
+        .catch((err) => {
+          toast.error("An Error Occured : ", err);
+        });
     }
   };
 
