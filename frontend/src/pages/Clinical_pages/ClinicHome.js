@@ -70,27 +70,7 @@ function ClinicHome() {
       <div className="Main">
         <div className="clinic-grid">
           {filteredClinics.map((clinic, index) => (
-            // <Card
-            //   key={index}
-            //   clinicId={clinic.id}
-            //   clinicName={clinic.clinicName}
-            //   clinicLocation={clinic.clinicLocation}
-            //   clinicContact={clinic.clinicContact}
-            //   clinicWebsite={
-            //     <a
-            //       href={clinic.clinicWebsite}
-            //       target="_blank"
-            //       rel="noopener noreferrer"
-            //       onClick={(e) => {
-            //         e.preventDefault(); // Prevent default link behavior
-            //         handleClinicWebsiteClick(clinic.clinicWebsite);
-            //       }}
-            //     >
-            //       {clinic.clinicWebsite}
-            //     </a>
-            //   }
-            // />
-            <Card
+             <Card
               key={index}
               clinicId={clinic.id}
               clinicName={DOMPurify.sanitize(clinic.clinicName)} // Escape user input
@@ -106,8 +86,8 @@ function ClinicHome() {
                     handleClinicWebsiteClick(clinic.clinicWebsite); // Ensure URL is safe
                   }}
                 >
-                  {DOMPurify.sanitize(clinic.clinicWebsite)} // Escape displayed
-                  URL
+                  {DOMPurify.sanitize(clinic.clinicWebsite)}
+                  {/* Escape displayed URL */}
                 </a>
               }
             />
