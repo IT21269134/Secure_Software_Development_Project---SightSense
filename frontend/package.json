@@ -16,7 +16,7 @@
 		"bootstrap": "^5.3.1",
 		"file-saver": "^2.0.5",
 		"html2canvas": "^1.4.1",
-		"jspdf": "^2.5.1",
+		"jspdf": "^4.1.0",
 		"jspdf-autotable": "^3.7.0",
 		"materialize-css": "^1.0.0",
 		"mdi-react": "^9.2.0",
